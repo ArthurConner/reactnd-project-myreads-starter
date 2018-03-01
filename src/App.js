@@ -2,7 +2,7 @@ import React from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
 import { Route } from 'react-router-dom'
-import { SearchBooks } from './SearchBooks.js'
+import  SearchBooks  from './SearchBooks.js'
 //import { MainCase } from './MainCase.js'
 
 import MainCase from './MainCase.js'
@@ -41,17 +41,80 @@ import { Link } from 'react-router-dom'
           "author": "Bruce Lee",
           "title": "To Kill a Wilt",
           "backgroundImage": "http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api"
+        },
+        ,
+        {
+          "id": "ryan4",
+          "shelf": "wantToRead",
+          "author": "Wilt Lee",
+          "title": "10 women",
+          "backgroundImage": "http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api"
         }
+
       ]
     }
 
-    render() {
 
+    moveBook = (book,value) => {
+
+    
+      var nextBooks = this.state.books.filter((c) => c.id !== book.id)
+      book.shelf = value
+      nextBooks.push(book)
+
+      this.setState((state) => ({
+        books: nextBooks
+      }))
+    }
+
+
+
+
+    render() {
       return (
         <div>
-          <MainCase books={this.state.books} title="what me" />
+          <Route exact path='/' render={() => (
+          <MainCase books={this.state.books} moveBook={this.moveBook} />
+          )}/>
+          <Route path='/search' render={() => (
+                   <SearchBooks contacts={[
+                    { name: 'Amanda' },
+                    { name: 'Richard' },
+                    { name: 'Geoff' }
+                  ]}/>
+          )}/>
         </div>
       )
+    }
+
+
+    grender() {
+      /*
+      return (
+        //<div>
+          <Route   path='/' render={() => (
+        <MainCase books={this.state.books} moveBook={this.moveBook} />
+          )}/>
+
+   
+
+     // </div>
+
+     <Route path='/search' render={() => (
+      <SearchBooks books={this.state.books} />
+    )}/>
+
+      )
+
+*/
+    }
+  
+
+    xrender() {
+
+
+    
+  
       
       return (
         <div className="App">
@@ -225,27 +288,3 @@ import { Link } from 'react-router-dom'
 
 
 export default BooksApp
-/*
-
-<Route exact path='/' render={() => (
-  <MainCase />
-)}/>
-<Route path='/search' render={({ history }) => (
-  <SearchBooks />
-)}/>
-*/
-
-/*
-  <div>
-        <h1>up and running</h1>
-        <MainCase />
-        <h1>and out</h1>
-      </div>
-      */
-
-
-      /*
-
-
-      
-      */
