@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 
-class ListContacts extends Component {
+class SearchBooks extends Component {
   static propTypes = {
     contacts: PropTypes.array.isRequired,
     onDeleteContact: PropTypes.func.isRequired
@@ -23,20 +23,22 @@ class ListContacts extends Component {
   }
 
   render() {
-    const { contacts, onDeleteContact } = this.props
+    const { books, onDeleteContact } = this.props
     const { query } = this.state
 
-    let showingContacts
+    let showingBooks
     if (query) {
       const match = new RegExp(escapeRegExp(query), 'i')
-      showingContacts = contacts.filter((contact) => match.test(contact.name))
+      showingBooks = books.filter((book) => match.test(book.name))
     } else {
-      showingContacts = contacts
+        showingBooks = books
     }
 
-    showingContacts.sort(sortBy('name'))
+    showingBooks.sort(sortBy('name'))
 
     return (
+
+        /*
       <div className='list-contacts'>
         <div className='list-contacts-top'>
           <input
@@ -77,7 +79,31 @@ class ListContacts extends Component {
         </ol>
       </div>
     )
+    */
+
+   <div className="search-books">
+   <div className="search-books-bar">
+     <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
+     <div className="search-books-input-wrapper">
+       {/*
+         NOTES: The search from BooksAPI is limited to a particular set of search terms.
+         You can find these search terms here:
+         https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
+
+         However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
+         you don't find a specific author or title. Every search is limited by search terms.
+       */}
+       <input type="text" placeholder="Search by title or author"/>
+
+     </div>
+   </div>
+   <div className="search-books-results">
+     <ol className="books-grid"></ol>
+   </div>
+ </div>
+    )
+
   }
 }
 
-export default ListContacts
+export default SearchBooks
