@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import sortBy from 'sort-by'
 import escapeRegExp from 'escape-string-regexp'
 import BookShelf from "./BookShelf"
-
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 
@@ -15,22 +15,26 @@ class SearchBooks extends Component {
   */
 
   state = {
-    query: ''
+    searchResults: [],
+    error: '',
+    query:'',
+    all:[]
   }
 
-  updateQuery = (query) => {
-    this.setState({ query: query.trim() })
-  }
 
   clearQuery = () => {
     this.setState({ query: '' })
   }
 
-
+  static propTypes = {
+    books: PropTypes.array.isRequired,
+    moveBook: PropTypes.func.isRequired,
+    updatesearch:  PropTypes.func.isRequired
+  }
  
   render() {
   
-    const { books, moveBook} = this.props
+    const { books, moveBook,updatesearch} = this.props
 
     return (
 
@@ -47,7 +51,10 @@ class SearchBooks extends Component {
             However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
             you don't find a specific author or title. Every search is limited by search terms.
           */}
-          <input type="text" placeholder="Search by title or author"/>
+          <input type="text" 
+          placeholder="Search by title or author"
+          onChange = {(event) => updatesearch(event.target.value)} 
+          />
 
         </div>
       </div>

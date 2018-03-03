@@ -24,10 +24,7 @@ class MainCase extends React.Component {
           <div className="list-books-content">
           <div>
             <div className="bookshelf">
-
             { cats.map((cat)=> makeShelf(cat,books,moveBook)) }
-            
-            
           </div>
          </div>
         </div>
