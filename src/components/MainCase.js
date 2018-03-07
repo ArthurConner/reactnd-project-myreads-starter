@@ -15,7 +15,7 @@ class MainCase extends React.Component {
 
     render() { 
         
-     //const { books, moveBook} = this.props
+     const { books} = this.props
      const cats = BookShelf.movesItems.filter((cat) => cat !== "none")
 
       return (
@@ -27,7 +27,7 @@ class MainCase extends React.Component {
           <div className="list-books-content">
           <div>
             <div className="bookshelf">
-            { cats.map((cat)=> makeShelf(cat,this.props.books)) }
+            { cats.map((cat)=> makeShelf(cat, books)) }
           </div>
          </div>
         </div>
@@ -45,21 +45,10 @@ class MainCase extends React.Component {
   }
 
 
-  function mapStateToProps (books) {
-    return  books
-  }
-  
-  function mapDispatchToProps (dispatch) {
-      return {
-     
-      }
-    }
 
 
 
-export default connect(
-    mapStateToProps, mapDispatchToProps
-  )(MainCase)
+export default MainCase
 
 
 
