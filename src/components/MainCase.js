@@ -46,7 +46,6 @@ class MainCase extends React.Component {
 
 
   function mapStateToProps (books) {
-    //const dayOrder = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
     return  books
   }
   

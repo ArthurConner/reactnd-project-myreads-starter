@@ -3,14 +3,24 @@ import ReactDOM from 'react-dom'
 import App from './components/App'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import bookReducer from './reducers'
 import { Provider } from 'react-redux'
+import logger from 'redux-logger'
+import thunk from 'redux-thunk'
+
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+ 
+
 
 const store = createStore(
   bookReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+
+    composeEnhancers(
+      applyMiddleware(logger,thunk)
+   )
+   )
 
 ReactDOM.render(
     <BrowserRouter>
