@@ -1,6 +1,6 @@
 import React from 'react'
-import * as BooksAPI from './BooksAPI'
-import './App.css'
+import * as BooksAPI from '../BooksAPI'
+import '../App.css'
 import {Switch, Route } from 'react-router-dom'
 import  SearchBooks  from './SearchBooks.js'
 import MainCase from './MainCase.js'

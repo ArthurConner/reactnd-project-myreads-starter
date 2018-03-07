@@ -1,6 +1,9 @@
 import React from 'react'
 import sortBy from 'sort-by'
-import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from '../BooksAPI'
+import { moveBook } from '../actions'
+import { connect } from 'react-redux'
+
 
 function makeSelect(book,opt){
     const key = "SelectOption_" + book.id + "_" + opt
@@ -23,7 +26,7 @@ class BookShelf extends React.Component {
 
 
     render(){
-        let {books, title, moveBook} = this.props
+        let {books, title} = this.props
         books.sort(sortBy('title'))
 
 
@@ -66,7 +69,23 @@ class BookShelf extends React.Component {
 }
 
 
+function mapStateToProps (food, calendar) {
+    //const dayOrder = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
+  
+    return {
+      
+    }
+  }
+  
+  function mapDispatchToProps (dispatch) {
+      return {
+        moveBook: (data) => dispatch(moveBook(data))
+      }
+    }
 
 
-export default BookShelf 
+
+export default connect(
+    mapStateToProps, mapDispatchToProps
+  )(BookShelf)
 

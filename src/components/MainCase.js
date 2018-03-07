@@ -1,6 +1,8 @@
 import React from 'react'
 import BookShelf from "./BookShelf"
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+
 
 function makeShelf(opt,books,moveBook){
     const current = books.filter((book) => book.shelf === opt)
@@ -13,7 +15,7 @@ class MainCase extends React.Component {
 
     render() { 
         
-     const { books, moveBook} = this.props
+     //const { books, moveBook} = this.props
      const cats = BookShelf.movesItems.filter((cat) => cat !== "none")
 
       return (
@@ -25,7 +27,7 @@ class MainCase extends React.Component {
           <div className="list-books-content">
           <div>
             <div className="bookshelf">
-            { cats.map((cat)=> makeShelf(cat,books,moveBook)) }
+            { cats.map((cat)=> makeShelf(cat,this.props.books)) }
           </div>
          </div>
         </div>
@@ -42,4 +44,23 @@ class MainCase extends React.Component {
     }
   }
 
-export default MainCase
+
+  function mapStateToProps (books) {
+    //const dayOrder = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
+    return  books
+  }
+  
+  function mapDispatchToProps (dispatch) {
+      return {
+     
+      }
+    }
+
+
+
+export default connect(
+    mapStateToProps, mapDispatchToProps
+  )(MainCase)
+
+
+

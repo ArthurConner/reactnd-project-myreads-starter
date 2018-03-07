@@ -14,6 +14,7 @@ class SearchBooks extends Component {
   }
   */
 
+ 
   state = {
     searchResults: [],
     error: '',
@@ -25,6 +26,7 @@ class SearchBooks extends Component {
   clearQuery = () => {
     this.setState({ query: '' })
   }
+  
 
   static propTypes = {
     books: PropTypes.array.isRequired,
