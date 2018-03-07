@@ -53,7 +53,7 @@ class SearchBooks extends Component {
           */}
           <input type="text" 
           placeholder="Search by title or author"
-          onChange = {(event) => updatesearch(event.target.value)} 
+          onChange={(event) => updatesearch(event.target.value)} 
           />
 
         </div>

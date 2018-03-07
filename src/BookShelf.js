@@ -3,11 +3,13 @@ import sortBy from 'sort-by'
 import * as BooksAPI from './BooksAPI'
 
 function makeSelect(book,opt){
-
+    const key = "SelectOption_" + book.id + "_" + opt
+    
     if (book.shelf === opt ){
-        return <option value="{opt}"  selected="selected" >{BookShelf.moveLookup[opt]}</option>
+        return <option value="{opt}" key={key} selected="selected" >{BookShelf.moveLookup[opt]}</option>
     }
-    return  <option value="{opt}"   >{BookShelf.moveLookup[opt]}</option>
+    
+    return  <option value="{opt}"  key={key}  >{BookShelf.moveLookup[opt]}</option>
 }
 
 class BookShelf extends React.Component {
@@ -40,7 +42,9 @@ class BookShelf extends React.Component {
                     )}
 
                     <div className="book-shelf-changer">
-                        <select onChange = {(event) => moveBook(book,event.target.value)} >
+                        <select 
+                        
+                        onChange={(event) => moveBook(book,event.target.value)} >
                             <option value="none" disabled>Move to...</option>
                             { BookShelf.movesItems.map((foo) => makeSelect(book,foo)) }
                         </select>

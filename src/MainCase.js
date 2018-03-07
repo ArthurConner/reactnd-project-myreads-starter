@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom'
 function makeShelf(opt,books,moveBook){
     const current = books.filter((book) => book.shelf === opt)
     const label = BookShelf.moveLookup[opt]
-    return <BookShelf books={current} title={label} moveBook={moveBook} />
+    const key = "shelf_" + label
+    return <BookShelf books={current} title={label} moveBook={moveBook} key={key}/>
 }
 
 class MainCase extends React.Component {
