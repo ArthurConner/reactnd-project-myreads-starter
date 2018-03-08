@@ -76,13 +76,7 @@ class BookShelf extends React.Component {
 }
 
 
-function mapStateToProps (food, calendar) {
-    //const dayOrder = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
-  
-    return {
-      
-    }
-  }
+
   
   function mapDispatchToProps (dispatch) {
       return {
@@ -93,6 +87,6 @@ function mapStateToProps (food, calendar) {
 
 
 export default connect(
-    mapStateToProps, mapDispatchToProps
+    null, mapDispatchToProps
   )(BookShelf)
 

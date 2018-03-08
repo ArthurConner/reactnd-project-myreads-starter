@@ -5,7 +5,7 @@ import {Switch, Route } from 'react-router-dom'
 import  SearchBooks  from './SearchBooks.js'
 import MainCase from './MainCase.js'
 import { connect } from 'react-redux'
-import { moveBook } from '../actions'
+import { loadBookShelf } from '../actions'
 
   class BooksApp extends React.Component {
 
@@ -26,6 +26,33 @@ import { moveBook } from '../actions'
     }
 
 */
+
+    // When the component mounts, we need to load out books from the AJAX call
+    componentDidMount(){
+      this.getAllBooks()
+    }
+  
+    // This method fires off the AJAX call, and updates our state with the book list from the server
+    getAllBooks(){
+      BooksAPI.getAll().then((bookDict)=>{
+        console.log("fetched remote books");
+       // const books = Object.key(bookDict)
+       // console.log(JSON.stringify(bookDict, null, "    "));
+        //console.log(bookDict[0])
+        const books = bookDict
+        this.props.loadBookShelf({books})
+       // this.setState({books})}
+      })
+    }
+  
+    // This method updates the book onto a new shelf
+    updateBookShelf(book,shelf){
+      var that = this
+      BooksAPI.update(book,shelf).then((result) => {
+        that.getAllBooks()
+      })
+    }
+
 
 
   updateQuery = (query)=> {
@@ -72,24 +99,21 @@ import { moveBook } from '../actions'
       )
     }
 
-
-
   }
   
 
-
-
 function mapStateToProps ({books}) {
-  //const dayOrder = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
-
-  console.log("mapping State in app.js ")
-  console.log(books)
-  return {books:books}
+  //console.log("mapping State in app.js ")
+  //console.log(books)
+  const mainBooks = Object.keys(books).map((key)=>{ return books[key]})
+ // console.log("making State in app.js ")
+  //console.log(mainBooks)
+  return {books:mainBooks}
 }
 
 function mapDispatchToProps (dispatch) {
     return {
-      moveBook: (data) => dispatch(moveBook(data))
+      loadBookShelf: (data) => dispatch(loadBookShelf(data))
     }
   }
 
