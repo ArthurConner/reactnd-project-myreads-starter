@@ -1,3 +1,24 @@
+# Thoughts on the project
+
+I wanted to have more of a structure than pure react and I thought this would be a light enough of an example to graph in redux and thunk.
+
+What I discovered is that there are some key similaries between objective-c programming and the world of react. You can think of the actions as messages. objective-c provides a responder chain that can handle them which is similar to reducers. Both also have central stores.
+
+If you are used to a m,v,vm,c architecture the mapStateToProps corresponds nicely to a view model.
+
+## Differences
+
+The major is that in IOS land you directly change the model which then sends messages. The view controller handles the messages and the updates the view which is simplier (and tend to be more resuable than a react component). The issues that comes up with view controllers are
+1. They get very big since that is where all of "junk" code goes in order to deal with all of the messages.
+2. They don't necessarily have a way of handling all of the dispatches that is testable. Granted you can use things like reactive programming which helps as well as a few built in principles like trying to put as much as possible in a view model as another approach
+
+React and Redux gives a fixed design pattern for routing actions(messages). The components also have more to do which helps centralize code bloat.
+
+The disadvantages of R&R
+1. Components aren't tried to be resuable. They can be, of course, but that isn't natural
+2. The actions aren't protected. Anything can register and fire. There are also the general issues of not being type safe, but that is a longer post.
+
+
 # MyReads Project
 
 This is the starter template for the final assessment project for Udacity's React Fundamentals course. The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
