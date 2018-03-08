@@ -61,7 +61,8 @@ import {
 
       searchResults:[
 
-      ]
+      ],
+      query:""
     }
 
   
@@ -106,10 +107,24 @@ import {
       return ret
        
       case SEARCH_TITLE:
-        const { searchResults} = action
+        const { searchResults, query} = action
+
+        const nextBooks = searchResults.map((book)=>{
+          if (book.id in state.books){
+            return state.books[book.id]
+          }
+          
+          return {
+            ...book,
+            "shelf": "none"
+          }
+
+        })
+
         return {
           ...state,
-          searchResults
+          "searchResults":nextBooks, 
+          query
         }
         
       default :

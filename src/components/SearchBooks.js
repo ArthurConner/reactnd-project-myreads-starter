@@ -30,8 +30,16 @@ class SearchComponent extends Component {
   
     const updatesearch = ""
 
-    const { books} = this.props
+    const { books,query} = this.props
 
+    let placeholder
+    if (query === ""){
+      placeholder = "Search by title or author"
+    } else {
+      placeholder = query
+    }
+    console.log("got query")
+    console.log(query)
     return (
 
         
@@ -48,7 +56,7 @@ class SearchComponent extends Component {
             you don't find a specific author or title. Every search is limited by search terms.
           */}
           <input type="text" 
-          placeholder="Search by title or author"
+          placeholder={placeholder}
           onChange={(event) => this.props.searchTitle({query:event.target.value})} 
           />
 

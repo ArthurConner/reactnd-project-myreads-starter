@@ -23,6 +23,7 @@ import { withRouter } from 'react-router'
 
       const books = this.props.books
       const searchBooks = this.props.searchResults
+      const query = this.props.query
 
       return (
         <div>
@@ -34,7 +35,8 @@ import { withRouter } from 'react-router'
           )}/>
           <Route path='/search' render={() => (
                    <SearchComponent 
-                   books={searchBooks} 
+                   books={searchBooks}
+                   query={query} 
                  />
           )}/>
           </Switch>
@@ -47,9 +49,9 @@ import { withRouter } from 'react-router'
   }
   
 
-function mapStateToProps ({books,searchResults}) {
+function mapStateToProps ({books,searchResults,query}) {
   const mainBooks = Object.keys(books).map((key)=>{ return books[key]})
-  return {books:mainBooks,searchResults}
+  return {books:mainBooks,searchResults,query}
 }
 
 function mapDispatchToProps (dispatch) {
