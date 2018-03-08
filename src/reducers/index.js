@@ -6,7 +6,7 @@ import {
   LOAD_BOOKSHELF
   } from '../actions'
   
-  const initialCalendarState = {
+  const initialTestCalendarState = {
 
    
       books: {
@@ -52,6 +52,17 @@ import {
       ]
     }
 
+    const initialCalendarState = {
+
+   
+      books: {
+ 
+      },
+
+      searchResults:[
+
+      ]
+    }
 
   
   function bookReducer (state = initialCalendarState, action) {

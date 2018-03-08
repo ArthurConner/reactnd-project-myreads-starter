@@ -6,6 +6,8 @@ import  SearchComponent  from './SearchBooks.js'
 import MainCase from './MainCase.js'
 import { connect } from 'react-redux'
 import { loadBookShelf } from '../actions'
+import { withRouter } from 'react-router'
+
 
 
   class BooksApp extends React.Component {
@@ -58,6 +60,6 @@ function mapDispatchToProps (dispatch) {
 
 
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps, mapDispatchToProps
-)(BooksApp)
+)(BooksApp))
