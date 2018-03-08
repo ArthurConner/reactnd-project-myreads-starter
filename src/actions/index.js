@@ -39,18 +39,18 @@ export const SEARCH_TITLE = 'SEARCH_TITLE'
 
 
 */
-export function moveBook (x) {
- const {book, shelf } = x
- 
- // console.log("making action for " + JSON.stringify(x , null, "    "))
- // console.log("shelf is " + shelf)
- // console.log("book is " + book)
+export function moveBook(x) {
+  const { book, shelf } = x
 
-  return (dispatch) =>{
+  // console.log("making action for " + JSON.stringify(x , null, "    "))
+  // console.log("shelf is " + shelf)
+  // console.log("book is " + book)
 
-    BooksAPI.update(book,shelf).then((result) => {
+  return (dispatch) => {
 
-      dispatch( {
+    BooksAPI.update(book, shelf).then((result) => {
+
+      dispatch({
         type: MOVE_BOOK,
         book,
         shelf,
@@ -60,29 +60,54 @@ export function moveBook (x) {
 }
 
 
-export function searchTitle ({ query }) {
-  return {
-    type: SEARCH_TITLE,
-    query,
+export function searchTitle({ query }) {
+
+  return (dispatch) => {
+    
+    BooksAPI.search(query).then((searchResults) => {
+
+      console.log("got search result")
+      console.log(searchResults)
+
+      if (searchResults instanceof Array) {
+        // Go through the searchResults and if a book is in the "book" list, set the book.shelf correctly,
+        // otherwise set it to None
+        //searchResults = searchResults.map((book) => { var foundbook = this.props.books.find(x => x.id === book.id); foundbook ? book.shelf = foundbook.shelf : book.shelf = 'none'; return book })
+        dispatch({
+          type: SEARCH_TITLE,
+          query,
+          searchResults
+        })
+      }
+      else {
+        console.log(searchResults)
+        /*
+        if (searchResults && searchResults.error)
+          this.setState({error:searchResults.error})
+        this.setState({searchResults:[]})
+        */
+      }
+    })
   }
 }
 
 
-export function loadBookShelf () {
+
+export function loadBookShelf() {
 
   //console.log("loading shelf")
-  return (dispatch)=>{
+  return (dispatch) => {
 
     BooksAPI.getAll().then((books) => {
       //that.getAllBooks()
 
-      dispatch( {
+      dispatch({
         type: LOAD_BOOKSHELF,
         books,
       })
 
     })
   }
-  
- 
+
+
 }

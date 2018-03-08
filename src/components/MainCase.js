@@ -1,14 +1,14 @@
 import React from 'react'
 import BookShelf from "./BookShelf"
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
+
 
 
 function makeShelf(opt,books,moveBook){
     const current = books.filter((book) => book.shelf === opt)
     const label = BookShelf.moveLookup[opt]
     const key = "shelf_" + label
-    return <BookShelf books={current} title={label} moveBook={moveBook} key={key}/>
+    return <BookShelf books={current} title={label}  key={key}/>
 }
 
 class MainCase extends React.Component {
@@ -32,14 +32,14 @@ class MainCase extends React.Component {
          </div>
         </div>
 
-               <div className="open-search">
+      <div className="open-search">
             <Link
               to="/search"
               className="add-contact"
               >Add a book</Link>
             </div>
-
       </div>
+
       );
     }
   }

@@ -1,6 +1,5 @@
 import React from 'react'
 import sortBy from 'sort-by'
-import * as BooksAPI from '../BooksAPI'
 import { moveBook } from '../actions'
 import { connect } from 'react-redux'
 
@@ -21,7 +20,7 @@ class BookShelf extends React.Component {
     static  movesItems = ["currentlyReading","wantToRead","read","none"]
     static  moveLookup = {"none":"None",   
                             "currentlyReading":"Currently Reading",
-                            "wantToRead":"Want to Reat",
+                            "wantToRead":"Want to Read",
                             "read":"Read"}
 
 

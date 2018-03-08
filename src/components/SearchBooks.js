@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import sortBy from 'sort-by'
-import escapeRegExp from 'escape-string-regexp'
+//import sortBy from 'sort-by'
+//import escapeRegExp from 'escape-string-regexp'
 import BookShelf from "./BookShelf"
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { searchTitle } from '../actions'
 
-
-class SearchBooks extends Component {
+class SearchComponent extends Component {
   /*
   static propTypes = {
     contacts: PropTypes.array.isRequired,
@@ -14,13 +15,6 @@ class SearchBooks extends Component {
   }
   */
 
- 
-  state = {
-    searchResults: [],
-    error: '',
-    query:'',
-    all:[]
-  }
 
 
   clearQuery = () => {
@@ -30,13 +24,13 @@ class SearchBooks extends Component {
 
   static propTypes = {
     books: PropTypes.array.isRequired,
-    moveBook: PropTypes.func.isRequired,
-    updatesearch:  PropTypes.func.isRequired
   }
  
   render() {
   
-    const { books, moveBook,updatesearch} = this.props
+    const updatesearch = ""
+
+    const { books} = this.props
 
     return (
 
@@ -55,13 +49,13 @@ class SearchBooks extends Component {
           */}
           <input type="text" 
           placeholder="Search by title or author"
-          onChange={(event) => updatesearch(event.target.value)} 
+          onChange={(event) => this.props.searchTitle({query:event.target.value})} 
           />
 
         </div>
       </div>
       <div className="search-books-results">
-    <  BookShelf books={books} title="" moveBook={moveBook} />
+    <  BookShelf books={books} title=""/>
       </div>
     </div>
     )
@@ -72,4 +66,16 @@ class SearchBooks extends Component {
   }
 }
 
-export default SearchBooks
+
+function mapDispatchToProps (dispatch) {
+  return {
+    searchTitle: (data) => dispatch(searchTitle(data))
+  }
+}
+
+
+
+export default connect(
+null, mapDispatchToProps
+)(SearchComponent)
+
