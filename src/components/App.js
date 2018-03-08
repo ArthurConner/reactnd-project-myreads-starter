@@ -1,11 +1,12 @@
 import React from 'react'
-import * as BooksAPI from '../BooksAPI'
+
 import '../App.css'
 import {Switch, Route } from 'react-router-dom'
 import  SearchBooks  from './SearchBooks.js'
 import MainCase from './MainCase.js'
 import { connect } from 'react-redux'
 import { loadBookShelf } from '../actions'
+
 
   class BooksApp extends React.Component {
 
@@ -29,38 +30,10 @@ import { loadBookShelf } from '../actions'
 
     // When the component mounts, we need to load out books from the AJAX call
     componentDidMount(){
-      this.getAllBooks()
+     // this.getAllBooks()
+      this.props.loadBookShelf()
     }
   
-    // This method fires off the AJAX call, and updates our state with the book list from the server
-    getAllBooks(){
-      BooksAPI.getAll().then((bookDict)=>{
-        console.log("fetched remote books");
-       // const books = Object.key(bookDict)
-       // console.log(JSON.stringify(bookDict, null, "    "));
-        //console.log(bookDict[0])
-        const books = bookDict
-        this.props.loadBookShelf({books})
-       // this.setState({books})}
-      })
-    }
-  
-    // This method updates the book onto a new shelf
-    updateBookShelf(book,shelf){
-      var that = this
-      BooksAPI.update(book,shelf).then((result) => {
-        that.getAllBooks()
-      })
-    }
-
-
-
-  updateQuery = (query)=> {
-
-    console.log(query)
-
-    }
-
 
     render() {
 

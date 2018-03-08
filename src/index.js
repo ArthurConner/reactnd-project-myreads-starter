@@ -18,15 +18,17 @@ const store = createStore(
   bookReducer,
 
     composeEnhancers(
-      applyMiddleware(logger,thunk)
+      applyMiddleware(thunk,logger)
    )
    )
 
 ReactDOM.render(
+  <Provider store={store}>
     <BrowserRouter>
-    <Provider store={store}>
+   
     <App />
-    </Provider>
-    </BrowserRouter>,
+
+    </BrowserRouter>
+    </Provider>,
     document.getElementById('root')
   );
