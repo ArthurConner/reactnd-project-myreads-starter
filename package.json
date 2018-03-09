@@ -3,6 +3,9 @@
     "axios": "^0.18.0",
     "escape-string-regexp": "^1.0.5",
     "form-serialize": "^0.7.2",
+    "grunt": "^1.0.2",
+    "grunt-esformatter": "^1.2.0",
+    "grunt-jsbeautifier": "^0.2.12",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
@@ -12,7 +15,8 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "winston": "^2.2.0"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"

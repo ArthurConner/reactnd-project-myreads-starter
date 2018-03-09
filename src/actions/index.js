@@ -20,10 +20,10 @@ const headers = {
 }
 
 export function moveBook(x) {
-  const { book, shelf } = x
+  const {book, shelf} = x
 
   return (dispatch) => {
- 
+
     const oldshelf = book.shelf
 
     dispatch({
@@ -32,40 +32,40 @@ export function moveBook(x) {
       shelf,
     })
 
-    const url =  {
+    const url = {
       method: 'PUT',
       url: `${api}/books/${book.id}`,
       headers: {
         ...headers,
         'Content-Type': 'application/json'
       },
-      data: {shelf}
+      data: {
+        shelf
+      }
     }
 
     console.log(url)
     axios(url)
-    .then(function (response) {
-
-    }).catch(function (error) {
+      .then(function(response) {}).catch(function(error) {
       console.log("we have a move error")
       console.log(error);
 
       const action = {
         type: MOVE_BOOK,
         book,
-        "shelf":oldshelf,
+        "shelf": oldshelf,
       }
 
       dispatch(action)
 
     });
-    
+
   }
-  
+
 }
 
 
-export function searchTitle({ query }) {
+export function searchTitle({query}) {
 
   return (dispatch) => {
     axios({
@@ -75,19 +75,21 @@ export function searchTitle({ query }) {
         ...headers,
         'Content-Type': 'application/json'
       },
-      data: JSON.stringify({ query })
-    }).then(function (response) {
-        const searchResults = response.data.books
-        const action = {
-          type: SEARCH_TITLE,
-          query,
-          searchResults,
-        }
-
-        dispatch(action)
-  
+      data: JSON.stringify({
+        query
       })
-      .catch(function (error) {
+    }).then(function(response) {
+      const searchResults = response.data.books
+      const action = {
+        type: SEARCH_TITLE,
+        query,
+        searchResults,
+      }
+
+      dispatch(action)
+
+    })
+      .catch(function(error) {
         console.log("we have a loadbookshelf error")
         console.log(error);
 
@@ -99,36 +101,38 @@ export function searchTitle({ query }) {
         }
 
         dispatch(action)
-  
-      });
-    }
 
-  
+      });
+  }
+
+
 }
 
 export function loadBookShelf() {
 
   return (dispatch) => {
 
-    axios.get(`${api}/books`, { headers })
-    .then(function (response) {
-      const books = response.data.books
-
-      const action = {
-        type: LOAD_BOOKSHELF,
-        books,
-      }
-
-      dispatch(action)
-
+    axios.get(`${api}/books`, {
+      headers
     })
-    .catch(function (error) {
-      console.log("we have a loadbookshelf error")
-      console.log(error);
-    });
-    
+      .then(function(response) {
+        const books = response.data.books
 
- 
+        const action = {
+          type: LOAD_BOOKSHELF,
+          books,
+        }
+
+        dispatch(action)
+
+      })
+      .catch(function(error) {
+        console.log("we have a loadbookshelf error")
+        console.log(error);
+      });
+
+
+
   }
 
 
