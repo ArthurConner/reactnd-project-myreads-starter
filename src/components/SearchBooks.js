@@ -35,10 +35,15 @@ class SearchComponent extends Component {
     const {books, query} = this.props
 
     let placeholder
+    let message = ""
     if (query === "") {
       placeholder = "Search by title or author"
     } else {
       placeholder = query
+
+      if (books.length < 1){
+        message = "no result found"
+      }
     }
     console.log("got query")
     console.log(query)
@@ -48,6 +53,7 @@ class SearchComponent extends Component {
       <div className="search-books">
       <div className="search-books-bar">
       <Link className="close-search" to="/" >Close</Link>
+     
      
         <div className="search-books-input-wrapper">
           { /*
@@ -69,6 +75,7 @@ class SearchComponent extends Component {
       <div className="search-books-results">
     <  BookShelf books={books} title=""/>
       </div>
+      <h2 className="bookshelf-title">{message}</h2>
     </div>
     )
 
